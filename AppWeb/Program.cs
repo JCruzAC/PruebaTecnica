@@ -1,7 +1,20 @@
+using CapaDatos.DataContext;
+using CapaDatos.Repositories;
+using CapaEntidades;
+using CapaNegocios.Services;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<AppDBContext>(options => {
+    options.UseSqlServer(builder.Configuration.GetConnectionString("StringDbApp"));
+});
+
+builder.Services.AddScoped<IGenericRepository<Cargo>, CargoRepository>();
+builder.Services.AddScoped<ICargoService, CargoService>();
 
 var app = builder.Build();
 

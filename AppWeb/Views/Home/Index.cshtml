@@ -1,8 +1,54 @@
-﻿@{
+﻿@model IEnumerable<CapaEntidades.Cargo>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fyhcreacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EstadoRegistro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RegistroEliminado)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fyhcreacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EstadoRegistro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegistroEliminado)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.IdCargo">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.IdCargo">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.IdCargo">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
